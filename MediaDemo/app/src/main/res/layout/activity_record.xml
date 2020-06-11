@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/record_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:text="0"
+            android:textColor="@color/colorPrimary"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/record_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="开始录音" />
+
+        <Button
+            android:id="@+id/record_stop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="结束录音" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="当前播放进度" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="2dp"
+                android:progress="0"
+                android:max="100"
+                android:progressDrawable="@drawable/progress_shape" />
+
+            <TextView
+                android:id="@+id/progress_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:text="0%" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/play_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="播放录音" />
+
+        <Button
+            android:id="@+id/play_pause"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="暂停播放" />
+
+        <Button
+            android:id="@+id/play_stop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="停止播放" />
+    </LinearLayout>
+</layout>
