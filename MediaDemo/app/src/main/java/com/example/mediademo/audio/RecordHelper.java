@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.example.mediademo.config.GlobalConfig;
 
 import java.io.File;
@@ -19,6 +20,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+/**
+ * @description: 录音与播放音频辅助类
+ * @author: chenjiayou
+ * @createBy: 2020-6-12
+ */
 
 public class RecordHelper implements IRecord {
 
@@ -43,10 +50,11 @@ public class RecordHelper implements IRecord {
     private int playState = NONE; // 当前录音播放状态
     private Handler handler;
     private Context context;
+    private String recordPcmPath; //录音原始文件 pcm
+    private String recordWavPath; //录音转换文件 wav
 
-    RecordHelper(Context context, Handler handler) {
-        this.context = context;
-        this.handler = handler;
+
+    private RecordHelper() {
     }
 
 
@@ -226,7 +234,7 @@ public class RecordHelper implements IRecord {
                             msg.what = RESET_PROGRESS;
                             handler.sendMessage(msg);
                         }
-                    }else if (playState == STOP || playState == RELEASE){
+                    } else if (playState == STOP || playState == RELEASE) {
                         playSeek = 0;
                         msg = Message.obtain();
                         msg.what = RESET_PROGRESS;
@@ -261,11 +269,70 @@ public class RecordHelper implements IRecord {
 
     @Override
     public File getRecordPcm() {
-        return new File(context.getExternalFilesDir(Environment.DIRECTORY_MUSIC), GlobalConfig.PCM_FILE_NAME);
+        if (StringUtils.isEmpty(recordPcmPath) || !new File(recordPcmPath).exists()) {
+            return new File(context.getExternalFilesDir(Environment.DIRECTORY_MUSIC), GlobalConfig.PCM_FILE_NAME);
+        } else {
+            return new File(recordPcmPath);
+        }
     }
+
 
     @Override
     public File getRecordWav() {
-        return new File(context.getExternalFilesDir(Environment.DIRECTORY_MUSIC), GlobalConfig.WAV_FILE_NAME);
+        if (StringUtils.isEmpty(recordWavPath) && !new File(recordWavPath).exists()) {
+            return new File(context.getExternalFilesDir(Environment.DIRECTORY_MUSIC), GlobalConfig.WAV_FILE_NAME);
+        } else {
+            return new File(recordWavPath);
+        }
+    }
+
+
+    public String getDefaultRecordPcmPath() {
+        return Environment.DIRECTORY_MUSIC + File.separator + GlobalConfig.PCM_FILE_NAME;
+    }
+
+    public String getDefaultRecordWavPath(){
+        return Environment.DIRECTORY_MUSIC + File.separator + GlobalConfig.WAV_FILE_NAME;
+
+    }
+
+    public static final class RecordHelperBuilder {
+        private Handler handler;
+        private Context context;
+        private String recordPcmPath; //录音原始文件 pcm
+        private String recordWavPath; //录音转换文件 wav
+
+        public static RecordHelperBuilder aRecordHelper() {
+            return new RecordHelperBuilder();
+        }
+
+        public RecordHelperBuilder withHandler(Handler handler) {
+            this.handler = handler;
+            return this;
+        }
+
+        public RecordHelperBuilder withContext(Context context) {
+            this.context = context;
+            return this;
+        }
+
+        public RecordHelperBuilder withRecordPcmPath(String recordPcmPath) {
+            this.recordPcmPath = recordPcmPath;
+            return this;
+        }
+
+        public RecordHelperBuilder withRecordWavPath(String recordWavPath) {
+            this.recordWavPath = recordWavPath;
+            return this;
+        }
+
+        public RecordHelper build() {
+            RecordHelper recordHelper = new RecordHelper();
+            recordHelper.context = this.context;
+            recordHelper.recordWavPath = this.recordWavPath;
+            recordHelper.recordPcmPath = this.recordPcmPath;
+            recordHelper.handler = this.handler;
+            return recordHelper;
+        }
     }
 }

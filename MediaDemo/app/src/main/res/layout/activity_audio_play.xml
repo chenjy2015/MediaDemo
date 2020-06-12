@@ -10,28 +10,9 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/record_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            android:text="0"
-            android:textColor="@color/colorPrimary"
-            android:textSize="32sp"
-            android:textStyle="bold" />
-
-
-        <Button
-            android:id="@+id/record_start"
+            android:id="@+id/audio_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="开始录音" />
-
-        <Button
-            android:id="@+id/record_stop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="结束录音" />
+            android:layout_height="wrap_content"/>
 
 
         <LinearLayout
@@ -84,11 +65,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="停止播放" />
-
-        <Button
-            android:id="@+id/play"
-            android:text="另起界面播放录音"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
 </layout>

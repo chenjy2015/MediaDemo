@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".audio.AudioExtractionActivity">
+
+        <TextView
+            android:id="@+id/tv_video_info"
+            android:textSize="22sp"
+            android:text="视频地址：sdcard/media/..."
+            android:layout_marginBottom="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/audio_extraction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="提取音视频" />
+
+        <Button
+            android:id="@+id/play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="播放录音" />
+
+
+    </LinearLayout>
+</layout>

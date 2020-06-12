@@ -2,6 +2,7 @@ package com.example.mediademo.audio;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 
@@ -17,10 +18,16 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * @description: 录音与播放
+ * @author: chenjiayou
+ * @createBy: 2020-6-12
+ */
+
 public class AudioRecord2Activity extends BaseUIActivity<ActivityRecordBinding> {
 
     RecordHelper recordHelper;
-    private MyHandler handler;
+    private MyHandler handler = new MyHandler();
     private Timer timer;
 
 
@@ -39,8 +46,7 @@ public class AudioRecord2Activity extends BaseUIActivity<ActivityRecordBinding> 
 
     @Override
     public void init() {
-        handler = new MyHandler();
-        recordHelper = new RecordHelper(this, handler);
+        recordHelper = new RecordHelper.RecordHelperBuilder().withContext(this).withHandler(handler).build();
     }
 
     @Override
@@ -50,6 +56,11 @@ public class AudioRecord2Activity extends BaseUIActivity<ActivityRecordBinding> 
         getDataBinding().playStart.setOnClickListener(v -> recordHelper.playInModeStream());
         getDataBinding().playPause.setOnClickListener(v -> recordHelper.playPause());
         getDataBinding().playStop.setOnClickListener(v -> recordHelper.playStop());
+        getDataBinding().play.setOnClickListener(v -> {
+            Intent intent = new Intent(AudioRecord2Activity.this, AudioPlayActivity.class);
+            intent.putExtra(AudioPlayActivity.INTENT_KEY, new AudioInfo(recordHelper.getDefaultRecordPcmPath(), 0));
+            startActivity(intent);
+        });
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.blankj.utilcode.util.PermissionUtils;
+import com.example.mediademo.audio.AudioExtractionActivity;
 import com.example.mediademo.audio.AudioRecord2Activity;
 import com.example.mediademo.databinding.ActivityMainBinding;
 import com.example.mediademo.opengl.SimpleRender;
@@ -58,7 +59,7 @@ public class MainActivity extends BaseUIActivity<ActivityMainBinding> {
             intent.putExtra("type", 1);
             startActivity(intent);
         });
-
+        getDataBinding().audioExtraction.setOnClickListener(v -> startActivity(new Intent(this, AudioExtractionActivity.class)));
     }
 
     @Override

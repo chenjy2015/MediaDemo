@@ -48,7 +48,7 @@ public class MediaMuxerUtil {
                 MediaFormat trackFormat = mMediaExtractor.getTrackFormat(i);
                 String typeMimb = trackFormat.getString(MediaFormat.KEY_MIME);
                 if (typeMimb.startsWith("video/")) {
-                    //这就获取了音频的信号通道了
+                    //这就获取了视频的信号通道了
                     videoIndex = i;
                     break;
                 }
@@ -230,7 +230,7 @@ public class MediaMuxerUtil {
             videoExtractor.selectTrack(videoTrackIndex);
 
 
-            long stampTimeAudio = 0;
+            long stampTimeAudio;
             ByteBuffer byteBufferAudio = ByteBuffer.allocate(500 * 1024);
             //获取帧之间的间隔时间
             {
@@ -248,7 +248,6 @@ public class MediaMuxerUtil {
 
             audioExtractor.unselectTrack(audioTrackIndex);
             audioExtractor.selectTrack(audioTrackIndex);
-
 
             while (true) {
                 int readVideoSampleSize = videoExtractor.readSampleData(byteBuffer, 0);

@@ -16,6 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".audio.AudioPlayActivity" />
+        <activity android:name=".audio.AudioExtractionActivity" />
         <activity android:name=".SimpleRenderActivity" />
         <activity android:name=".MediaMuxerActivity" />
         <activity android:name=".TextureViewActivity" />

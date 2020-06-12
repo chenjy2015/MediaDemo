@@ -54,5 +54,11 @@
             android:layout_height="wrap_content"
             android:text="OpenGLES 图片绘制" />
 
+        <Button
+            android:id="@+id/audio_extraction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="音频提取2" />
+
     </LinearLayout>
 </layout>
